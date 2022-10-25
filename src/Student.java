@@ -9,7 +9,14 @@ public class Student
 	
 	
 	
-	
+	void setcourseList(ArrayList<Course> courseList)
+	{
+	this.courseList = courseList;	
+	}
+	public ArrayList<Course> getcourseList()
+	{
+		return courseList;
+	}
 	
 	
 	Course CourseOfStudent = new Course();
