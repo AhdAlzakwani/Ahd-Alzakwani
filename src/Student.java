@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 public class Student
 {
-    String studentName;
-    String studentEmail;
+    private String studentName;
+    private String studentEmail;
 	ArrayList<Course> courseList = new ArrayList<>();
 	
 	void setcourseList(ArrayList<Course> courseList)

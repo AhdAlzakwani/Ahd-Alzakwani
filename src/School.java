@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class School {
-	String schoolName;
+	private String schoolName;
 	
 	
 ArrayList<Student> studentList = new ArrayList<>();

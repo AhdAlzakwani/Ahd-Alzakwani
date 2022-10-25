@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Marks {
-    int courseMark;
+    private int courseMark;
  
 	public void setCourseMark(int courseMark)
 	{

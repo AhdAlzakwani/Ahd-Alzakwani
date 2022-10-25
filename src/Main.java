@@ -222,12 +222,12 @@ public class Main {
 				System.out.println("*      STUDENT REPORT      *");
 				System.out.println("*****************************");
 				 for(School h: schoolList) {
-					 System.out.println("\tSchool Name: "+ h.schoolName);
+					 System.out.println("\tSchool Name: "+ h.getSchoolName());
 					 for(Student s: h.studentList) {
-						 System.out.println("\tStudent Name: \t"+ s.studentName+"\tStudent Email: \t"+s.studentEmail);
+						 System.out.println("\tStudent Name: \t"+ s.getStudentName()+"\tStudent Email: \t"+s.getstudentEmail());
 						 for(Course c: s.courseList) {
 							 for(Marks m: c.getmarkList()) {
-							 System.out.println("\nCourse Name: "+ c.courseName + " \tCourse Marks" + m.getCourseMark());
+							 System.out.println("\nCourse Name: "+ c.getcourseName() + " \tCourse Marks" + m.getCourseMark());
 						 }
 						 }
 					 
