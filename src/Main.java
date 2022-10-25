@@ -72,7 +72,7 @@ public class Main {
 			System.out.println("Welcom Ms :\t"+inputTeacherName);
 			System.out.println("*****************************");
 			System.out.println("");
-
+// Using HashMapm To Create Menus
 			menueOptions.put(1, "INPUT STUDENT DETAILS \n");
 			menueOptions.put(2, "STUDENT REPORT \n");
 			menueOptions.put(3, "HISTORY PROGRAM \n");
