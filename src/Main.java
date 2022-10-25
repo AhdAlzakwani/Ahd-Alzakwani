@@ -91,6 +91,7 @@ public class Main {
 				System.out.println("*****************************");
 				System.out.println("*      STUDENT DETAILS      *");
 				System.out.println("*****************************");
+//				 Inserting Schools Details 
 				while(schoolExit)
 				{ 		
 
