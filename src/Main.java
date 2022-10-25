@@ -53,6 +53,7 @@ public class Main {
 		
 		
 		while(teacherExit) {
+//			Teachers Details Inputs
 		System.out.println("Enter Teacher Name :");
 		String inputTeacherName = sa.next();
 		System.out.println("Welcom Ms :\t"+inputTeacherName);
