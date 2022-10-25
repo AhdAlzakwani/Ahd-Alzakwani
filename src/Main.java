@@ -18,7 +18,7 @@ public class Main {
 	public static void main(String[] args) {
         Set<String> emailSet = new HashSet<>();
 		Stack<String> history = new Stack<String>();
-		HashMap<Integer, String> menueOptions = new HashMap<Integer, String>();
+//		HashMap<Integer, String> menueOptions = new HashMap<Integer, String>();
 		HashMap<Integer, String> subMenueOptions = new HashMap<Integer, String>();
 		ArrayList<String> emailList = new ArrayList<>();
 		ArrayList<School> schoolList = new ArrayList<>();
