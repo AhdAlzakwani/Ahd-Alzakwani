@@ -123,6 +123,7 @@ public class Main {
 				    currency = sa.nextInt();
 				    System.out.println("Enter Student Amount");
 				    amount = sa.nextInt();
+				    // If Conditions
 				    if(currency == 1)
 				    {
 				    	 nameCurrency = "BRL";
