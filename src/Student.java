@@ -7,14 +7,7 @@ public class Student
     private String studentEmail;
 	ArrayList<Course> courseList = new ArrayList<>();
 	
-	void setcourseList(ArrayList<Course> courseList)
-	{
-	this.courseList = courseList;	
-	}
-	public ArrayList<Course> getcourseList()
-	{
-		return courseList;
-	}
+	
 	
 	
 	
