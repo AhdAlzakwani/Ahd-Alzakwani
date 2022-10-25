@@ -28,7 +28,7 @@ public class Main {
 	
 	    
 		Scanner sa = new Scanner(System.in);
-//		Scanner san = new Scanner(System.in);
+		Scanner san = new Scanner(System.in);
 		Main ourSchool = new Main();
 		//Student studentDetailss = new Student();
 		Course studentCoursee =new Course();
