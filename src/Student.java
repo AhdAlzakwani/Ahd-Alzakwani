@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Student 
+public class Student implements Serializable
 {
     private String studentName;
     private String studentEmail;
@@ -44,6 +45,12 @@ public class Student
         {
         
         }
+		public Student(String studentName, String studentEmail) {
+			this.studentEmail = studentEmail;
+			this.studentName = studentName;
+			
+			// TODO Auto-generated constructor stub
+		}
 
 
         
