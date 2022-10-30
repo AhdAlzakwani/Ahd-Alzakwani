@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -28,23 +29,27 @@ public class Main {
 		else
 			return (n * factorial(n - 1));
 	}
+	
+	public static void validDateUserName(String userName) throws IllegalArgumentException  
+	{
+		userName = "Ahd";
+		if(userName !="Ahd")
+		{
+			throw new IllegalArgumentException("*   Falid UserName Input   *");
 
-	private static String history(String file_path) {
-
-		String str = "";
-
-		try {
-
-			str = new String(Files.readAllBytes(Paths.get(file_path)));
 		}
-
-		catch (IOException e) {
-
-			e.printStackTrace();
-		}
-
-		return str;
 	}
+	public static void validDateUserPassword(int password) throws NumberFormatException  
+	{
+		int userpassword = 1234;
+		if(password !=userpassword)
+		{
+			throw new NumberFormatException("*   Falid UserPassword Input   *");
+
+		}
+	}
+
+
 
 	public static void main(String[] args) {
 //		Declaration Classes and List 
@@ -53,24 +58,29 @@ public class Main {
 		HashMap<Integer, String> menueOptions = new HashMap<Integer, String>();
 		HashMap<Integer, String> subMenueOptions = new HashMap<Integer, String>();
 		ArrayList<String> emailList = new ArrayList<>();
-		ArrayList<String> fileList = new ArrayList<>();
+		//ArrayList<String> fileList = new ArrayList<>();
 		ArrayList<School> schoolList = new ArrayList<>();
-		ArrayList<Student> studentList = new ArrayList<>();
+		//ArrayList<Student> studentList = new ArrayList<>();
 		HashMap<String, Double> studentFees = new HashMap<String, Double>();
+
+		
 		HashMap<String, HashMap<String, Double>> studentFeesWithCurrency = new HashMap<String, HashMap<String, Double>>();
 		FileOutputStream fileStudentName;
 		ObjectOutputStream fileStudentWrite = null;
 		ObjectInputStream fileStudentRead = null;
-
 		FileOutputStream fileName;
 		ObjectInputStream fileRead = null;
-
 		ObjectOutputStream fileWrite = null;
+		
+		
+		
 		try {
 			fileName = new FileOutputStream("C:\\Users\\User009\\Desktop\\School\\history.txt");
 			fileWrite = new ObjectOutputStream(fileName);
-
-			fileRead = new ObjectInputStream(new FileInputStream("C:\\Users\\User009\\Desktop\\School\\history.txt"));
+			fileRead = new ObjectInputStream(new FileInputStream(
+					"C:\\Users\\User009\\Desktop\\School\\history.txt"));
+			
+			
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -98,16 +108,21 @@ public class Main {
 		System.out.println("*****************************");
 		System.out.println("*       HELOW TEACHER       *");
 		System.out.println("*****************************");
-
+		String inputTeacherName=null;
+		int inputTeacherPassword =0;
 		while (teacherExit) {
 //			Teachers Details Inputs
+			try
+			{
 			System.out.println("Enter Teacher Name :");
-			String inputTeacherName = sa.next();
-			history.push(inputTeacherName);
+			 inputTeacherName = sa.next();
+			 validDateUserName(inputTeacherName);
+			 System.out.println("Enter Teacher Password :");
+			 inputTeacherPassword = sa.nextInt();
+			 validDateUserPassword(inputTeacherPassword);
+			 
 
-			System.out.println("Welcom Ms :\t" + inputTeacherName);
-			System.out.println("Enter Teacher Password :");
-			int inputTeacherPassword = sa.nextInt();
+			history.push(inputTeacherName);
 			String teacherName = "Ahd";
 			boolean teacherCheck = inputTeacherName.equals(teacherName);
 
@@ -373,7 +388,7 @@ public class Main {
 									Student student1 = new Student("Ahd", "Ahd@gmail.com");
 									Student student2 = new Student("Amaal", "Amaal@gmail.com");
 									Student student3 = new Student("Amna", "Amna@hotmail.com");
-									
+
 									try {
 										fileStudentName = new FileOutputStream(
 												"C:\\Users\\User009\\Desktop\\School\\studentsDetails.txt");
@@ -428,9 +443,15 @@ public class Main {
 					} while (optionExit);
 
 				}
+				
+				else
+				{
+					System.out.println("Wronge Password");
+
+				}
 
 			} else {
-				System.out.println("Wronge UserName Or Password ");
+				System.out.println("Wronge UserName  ");
 			}
 		}
 		teacherExit = false;
