@@ -58,10 +58,9 @@ public class Main {
 		ArrayList<Student> studentList = new ArrayList<>();
 		HashMap<String, Double> studentFees = new HashMap<String, Double>();
 		HashMap<String, HashMap<String, Double>> studentFeesWithCurrency = new HashMap<String, HashMap<String, Double>>();
-		 FileOutputStream fileStudentName ;
-		 ObjectOutputStream fileStudentWrite = null;
-		 ObjectInputStream fileStudentRead =null;
-		
+		FileOutputStream fileStudentName;
+		ObjectOutputStream fileStudentWrite = null;
+		ObjectInputStream fileStudentRead = null;
 
 		FileOutputStream fileName;
 		ObjectInputStream fileRead = null;
@@ -147,7 +146,6 @@ public class Main {
 
 								schoolDetails.setSchoolName(inputStudentSchool);
 								hasExit = Boolean.TRUE;
-								
 
 								while (isExit) {
 									Student studentDetails = new Student();
@@ -162,7 +160,6 @@ public class Main {
 									studentDetails.setstudentEmail(inputStudentEmail);
 									emailList.add(inputStudentEmail);
 
-									
 									while (isCurrencyExit) {
 										System.out.println("Choose currency (1- BRL , 2- USD , 3- EUR)");
 										currency = sa.nextInt();
@@ -255,8 +252,7 @@ public class Main {
 								}
 
 							}
-							
-							
+
 							try {
 								fileWrite.writeObject(history);
 							} catch (IOException e) {
@@ -266,36 +262,36 @@ public class Main {
 							break;
 						case 2:
 
-							
-							  System.out.println("*****************************");
-							  System.out.println("*      STUDENT REPORT      *");
-							  System.out.println("*****************************"); for (School h :
-							  schoolList) { System.out.println("\tSchool Name: " + h.getSchoolName()); for
-							  (Student s : h.studentList) { System.out.println("\tStudent Name: \t" +
-							  s.getStudentName() + "\tStudent Email: \t" + s.getstudentEmail()); for
-							  (Course c : s.courseList) { for (Marks m : c.getmarkList()) {
-							  System.out.println("\nCourse Name: " + c.getcourseName() + " \tCourse Marks"
-							  + m.getCourseMark()); } }
-							  
-							  } }
-							 
-							
-							
+							System.out.println("*****************************");
+							System.out.println("*      STUDENT REPORT      *");
+							System.out.println("*****************************");
+							for (School h : schoolList) {
+								System.out.println("\tSchool Name: " + h.getSchoolName());
+								for (Student s : h.studentList) {
+									System.out.println("\tStudent Name: \t" + s.getStudentName() + "\tStudent Email: \t"
+											+ s.getstudentEmail());
+									for (Course c : s.courseList) {
+										for (Marks m : c.getmarkList()) {
+											System.out.println("\nCourse Name: " + c.getcourseName() + " \tCourse Marks"
+													+ m.getCourseMark());
+										}
+									}
+
+								}
+							}
+
 							break;
 						case 3:
 							System.out.println("*****************************");
 							System.out.println("*          HISTORY          *");
 							System.out.println("*****************************");
 
-							
 							try {
 								Stack<String> st = (Stack<String>) fileRead.readObject();
 								System.out.println(st);
 							} catch (ClassNotFoundException | IOException e) {
 								System.out.println(e.getMessage());
 							}
-							
-						
 
 							break;
 						case 4:
@@ -374,46 +370,43 @@ public class Main {
 									}
 									break;
 								case 3:
-									Student student1 = new Student("Ahd","Ahd@gmail.com");
-									Student student2 = new Student("Amaal","Amaal@gmail.com");
-									Student student3 = new Student("Amna","Amna@hotmail.com");
+									Student student1 = new Student("Ahd", "Ahd@gmail.com");
+									Student student2 = new Student("Amaal", "Amaal@gmail.com");
+									Student student3 = new Student("Amna", "Amna@hotmail.com");
+									
+									try {
+										fileStudentName = new FileOutputStream(
+												"C:\\Users\\User009\\Desktop\\School\\studentsDetails.txt");
+										fileStudentWrite = new ObjectOutputStream(fileStudentName);
+										fileStudentRead = new ObjectInputStream(new FileInputStream(
+												"C:\\Users\\User009\\Desktop\\School\\studentsDetails.txt"));
 
-										try {
-											  fileStudentName = new FileOutputStream("C:\\Users\\User009\\Desktop\\School\\studentsDetails.txt");
-											  fileStudentWrite = new ObjectOutputStream(fileStudentName);
-											  fileStudentRead = new ObjectInputStream(new FileInputStream("C:\\Users\\User009\\Desktop\\School\\studentsDetails.txt"));
+										fileStudentWrite.writeObject(student1);
+										fileStudentWrite.writeObject(student2);
+										fileStudentWrite.writeObject(student3);
+										fileStudentWrite.flush();
+										fileStudentWrite.close();
 
-											 fileStudentWrite.writeObject(student1);
-											 fileStudentWrite.writeObject(student2);
-											 fileStudentWrite.writeObject(student3);
-											 fileStudentWrite.flush();
-											 fileStudentWrite.close();
+										Student s1 = (Student) fileStudentRead.readObject();
+										Student s2 = (Student) fileStudentRead.readObject();
+										Student s3 = (Student) fileStudentRead.readObject();
 
+										System.out.println("Student Name: " + s1.getStudentName() + "Student Mail: "
+												+ s1.getstudentEmail());
+										System.out.println("Student Name: " + s2.getStudentName() + "Student Mail: "
+												+ s2.getstudentEmail());
+										System.out.println("Student Name: " + s3.getStudentName() + "Student Mail: "
+												+ s3.getstudentEmail());
 
-											 Student s1 =(Student)fileStudentRead.readObject();
-											 Student s2 =(Student)fileStudentRead.readObject();
-											 Student s3 =(Student)fileStudentRead.readObject();
-											 
-											 System.out.println("Student Name: "+s1.getStudentName()+"Student Mail: "+s1.getstudentEmail());
-											 System.out.println("Student Name: "+s2.getStudentName()+"Student Mail: "+s2.getstudentEmail());
-											 System.out.println("Student Name: "+s3.getStudentName()+"Student Mail: "+s3.getstudentEmail());
+									} catch (IOException e) {
+										System.out.println(e.getMessage());
+									}
 
-											 
-
-										} catch (IOException e) {
-											 System.out.println(e.getMessage());
-										}
-
-									 catch (ClassNotFoundException e) {
+									catch (ClassNotFoundException e) {
 										// TODO Auto-generated catch block
 										e.printStackTrace();
-									} 
-									
-									
+									}
 
-									
-									
-									
 									break;
 								case 4:
 									isSubExit = false;
