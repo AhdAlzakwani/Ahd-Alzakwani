@@ -66,7 +66,8 @@ public class Main {
 		School ourSchool = new School();
 		Course studentCoursee = new Course();
 		Marks courseMarkss = new Marks();
-		int currency = 0;
+		String currency = null;
+		int currencyInput = 0;
 		double amount = 0;
 		double amountcal = 0;
 		String nameCurrency = "";
@@ -164,62 +165,98 @@ public class Main {
 							while (schoolExit) {
 
 								School schoolDetails = new School();
-								try {
+
 									System.out.println("Enter School Name");
 									inputStudentSchool = sa.next();
+									schoolDetails.setSchoolName(inputStudentSchool);
+									history.push(inputStudentSchool);
+									
+								try {
 									if (!inputStudentSchool.matches("^[A-Za-z]*$")) {
-										
-										System.out.println("\"*InFalid Format*\"");
-										System.out.println("Enter School Name");
-										inputStudentSchool = sa.next();
-										
-									} 
-								} catch (Exception ex) {
-									System.out.println(ex.getMessage());
+										throw new Exception("\"\\\"*InFalid Format*\\\"\"");
+									}
+									
+								}catch(Exception e)
+								{
+									System.out.println(e.getMessage());
 									continue;
 								}
+
 								
-								history.push(inputStudentSchool);
-
-								schoolDetails.setSchoolName(inputStudentSchool);
+								
+								
 								hasExit = Boolean.TRUE;
-
+								String inputStudentName = null;
 								while (isExit) {
 									Student studentDetails = new Student();
 									System.out.println("Enter Student Name");
-									String inputStudentName = sa.next();
+									inputStudentName = sa.next();
 									history.push(inputStudentName);
 									studentDetails.setStudentName(inputStudentName);
-
+									
+									
+									try {
+									 if(!inputStudentName.matches("^[A-Za-z]*$"))
+									 {
+										 throw new Exception("\"\\\"*InFalid Format*\\\"\"");
+										}
+									 
+									}catch(Exception e)
+									{
+										System.out.println(e.getMessage());
+										continue;
+									}
+									
+									String inputStudentEmail= null;
 									System.out.println("Enter Student Email");
-									String inputStudentEmail = sa.next();
+									 inputStudentEmail = sa.next();
 									history.push(inputStudentEmail);
 									studentDetails.setstudentEmail(inputStudentEmail);
 									emailList.add(inputStudentEmail);
+									
+									
+									try {
+									if(!inputStudentEmail.matches("^[A-Za-z0-9+_.-]+@(.+)$"))
+									 {
+										
+										 throw new Exception("\"\\\"*InFalid  Email Format*\\\"\"");
+									 }
+									}catch(Exception e)
+									{
+										System.out.println(e.getMessage());
+										continue;
+									}
 
 									while (isCurrencyExit) {
+										try {
 										System.out.println("Choose currency (1- BRL , 2- USD , 3- EUR)");
-										currency = sa.nextInt();
+										currency = sa.next();
+										currencyInput = Integer.parseInt(currency);
+										
 										System.out.println("Enter Student Amount");
 										amount = sa.nextInt();
 										// If Conditions
-										if (currency == 1) {
+										if (currencyInput == 1) {
 											nameCurrency = "BRL";
 											amountcal = amount * 13.69;
-										} else if (currency == 2) {
+										} else if (currencyInput == 2) {
 											nameCurrency = "USD";
 											amountcal = amount * 2.60;
-										} else if (currency == 3) {
+										} else if (currencyInput == 3) {
 											nameCurrency = "EUR";
 											amountcal = amount * 2.65;
-										} else {
-											System.out.println(
-													"Please choose currency from the list(1- BRL , 2- USD , 3- EUR)");
+										} 
+										}catch(Exception e)
+										{
+											System.out.println(e.getMessage());
+											continue;
 										}
 										System.out.println("Student Amount" + amountcal);
 
 										studentFees.put(nameCurrency, amountcal);
 										studentFeesWithCurrency.put(studentDetails.getStudentName(), studentFees);
+										
+									
 										System.out.println("DO You want to Add Other Currency ? press 1");
 										int isExitCurrency = sa.nextInt();
 										if (isExitCurrency == 0) {
@@ -236,6 +273,19 @@ public class Main {
 										String inputCourseName = sa.next();
 										history.push(inputCourseName);
 										studentCourse.setcourseName(inputCourseName);
+										
+										try {
+											if (!inputCourseName.matches("^[A-Za-z]*$")) {
+												throw new Exception("\"\\\"*InFalid Course Format*\\\"\"");
+											}
+											
+										}catch(Exception e)
+										{
+											System.out.println(e.getMessage());
+											continue;
+										}
+										
+										try {
 										System.out.println("Enter Mark for Course :");
 										int inputCourseMark = sa.nextInt();
 										String iinputCourseMark = String.valueOf(inputCourseMark);
@@ -243,6 +293,11 @@ public class Main {
 										courseMarks.setCourseMark(inputCourseMark);
 										studentCourse.markList.add(courseMarks);
 										studentDetails.courseList.add(studentCourse);
+										}catch(Exception e)
+										{
+											System.out.println(e.getMessage());
+											continue;
+										}
 
 										System.out.println("Do You want To Add course press 1 if not press 0");
 										int exitoutput = sa.nextInt();
