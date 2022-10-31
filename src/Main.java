@@ -77,6 +77,7 @@ public class Main {
 		boolean schoolExit = true;
 		boolean optionExit = true;
 		boolean isSubExit = true;
+		boolean chooseInputMnue = true;
 		System.out.println("*****************************");
 		System.out.println("*   WELCOME TO OUR SYSTEM   *");
 		System.out.println("*****************************");
@@ -86,73 +87,52 @@ public class Main {
 		String inputTeacherPassword = null;
 		String teacherpass = "1234";
 		String teacherName = "Ahd";
+		String inputStudentSchool = null;
 
 		while (teacherExit) {
 //			Teachers Details Inputs
 
-			
-			
-			try
-			{
-			System.out.println("Enter Teacher Name :");
-			inputTeacherName = sa.next();
-			inputTeacherName.matches("^[A-Za-z]*$");
-		    System.out.println("Falid String Format");
-			
-//			else
-//			{
-//				System.out.println("Not Falid String Format \n");
-//				teacherExit = true;
-//			}
-			}
-			catch(NumberFormatException e)
-			{
+			try {
+				System.out.println("Enter Teacher Name :");
+				inputTeacherName = sa.next();
+				if (inputTeacherName.matches("^[A-Za-z]*$")) // meaning
+				{
+					System.out.println("Falid String Format");
+				} else {
+					System.out.println("Not Falid String Format \n");
+					teacherExit = true;
+				}
+			} catch (InputMismatchException e) {
 				System.out.println("Not Falid String Format \n");
+				System.out.println("Enter Teacher Name :");
+				inputTeacherName = sa.next();
+				// teacherExit = true;
+			}
+
+			try {
+				System.out.println("Enter Teacher Password :");
+				inputTeacherPassword = sa.next();
+				Integer.parseInt(inputTeacherPassword);
+				System.out.println("Falid Number Format");
+			} catch (NumberFormatException e) {
+				System.out.println("Not Falid Number Format \n");
 				teacherExit = true;
 			}
-			
-			
-			
-			
-			
-			
-			
-			try
-			{
-			System.out.println("Enter Teacher Password :");
-			inputTeacherPassword = sa.next();
-			Integer.parseInt(inputTeacherPassword);
-			System.out.println("Falid Number Format");
-			}
-			catch(NumberFormatException e)
-			{
-				System.out.println("Not Falid Number Format \n");
-				teacherExit=true;
-			}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+
 			history.push(inputTeacherName);
-			//boolean teacherCheck = inputTeacherName.equals(teacherName);
-            
+			history.push(inputTeacherPassword);
+
+			// boolean teacherCheck = inputTeacherName.equals(teacherName);
+
 			if (inputTeacherName.matches(teacherName)) {
-				if (inputTeacherPassword.equals(teacherpass) ) {
+				if (inputTeacherPassword.equals(teacherpass)) {
 					do {
+
 						System.out.println("*****************************");
 						System.out.println("Welcom Ms :\t" + inputTeacherName);
 						System.out.println("*****************************");
 						System.out.println("");
-// Using HashMapm To Create Menus
+						// Using HashMapm To Create Menus
 						menueOptions.put(1, "INPUT STUDENT DETAILS \n");
 						menueOptions.put(2, "STUDENT REPORT \n");
 						menueOptions.put(3, "HISTORY PROGRAM \n");
@@ -161,12 +141,22 @@ public class Main {
 						menueOptions.put(6, "PRINT CODING PROBLEM \n");
 						menueOptions.put(7, "EXIT FROM PROGRAM \n");
 						System.out.println(menueOptions);
-						System.out.println("PLEASE SELECT ONLY ONE OPTION");
-						System.out.println("*****************************");
-						int option = sa.nextInt();
-
+						String option = null;
+						do {
+						try {
+							System.out.println("PLEASE SELECT ONLY ONE OPTION");
+							System.out.println("*****************************");
+							option = sa.next();
+							Integer.parseInt(option);
+							
+							chooseInputMnue = false;
+						} catch (NumberFormatException e) {
+							System.out.println("           Wroooong          ");
+							System.out.println("please select numbers Only \n");
+						}
+						}while(chooseInputMnue);
 						switch (option) {
-						case 1:
+						case "1":
 							System.out.println("*****************************");
 							System.out.println("*      STUDENT DETAILS      *");
 							System.out.println("*****************************");
@@ -174,8 +164,21 @@ public class Main {
 							while (schoolExit) {
 
 								School schoolDetails = new School();
-								System.out.println("Enter School Name");
-								String inputStudentSchool = sa.next();
+								try {
+									System.out.println("Enter School Name");
+									inputStudentSchool = sa.next();
+									if (!inputStudentSchool.matches("^[A-Za-z]*$")) {
+										
+										System.out.println("\"*InFalid Format*\"");
+										System.out.println("Enter School Name");
+										inputStudentSchool = sa.next();
+										
+									} 
+								} catch (Exception ex) {
+									System.out.println(ex.getMessage());
+									continue;
+								}
+								
 								history.push(inputStudentSchool);
 
 								schoolDetails.setSchoolName(inputStudentSchool);
@@ -294,7 +297,7 @@ public class Main {
 							}
 
 							break;
-						case 2:
+						case "2":
 
 							System.out.println("*****************************");
 							System.out.println("*      STUDENT REPORT      *");
@@ -315,7 +318,7 @@ public class Main {
 							}
 
 							break;
-						case 3:
+						case "3":
 							System.out.println("*****************************");
 							System.out.println("*          HISTORY          *");
 							System.out.println("*****************************");
@@ -328,7 +331,7 @@ public class Main {
 							}
 
 							break;
-						case 4:
+						case "4":
 							System.out.println("*****************************");
 							System.out.println("*  STUDENT DUPLICATE EMAILE *");
 							System.out.println("*****************************");
@@ -340,7 +343,7 @@ public class Main {
 							}
 							break;
 
-						case 5:
+						case "5":
 							System.out.println("*****************************");
 							System.out.println("*       STUDENT AMOUNT      *");
 							System.out.println("*****************************");
@@ -355,7 +358,7 @@ public class Main {
 							}
 
 							break;
-						case 6:
+						case "6":
 							do {
 
 								System.out.println("*****************************");
@@ -449,7 +452,7 @@ public class Main {
 							} while (isSubExit);
 
 							break;
-						case 7:
+						case "7":
 							System.out.println("*****************************");
 							System.out.println("*      THANK YOU      *");
 							System.out.println("*****************************");
