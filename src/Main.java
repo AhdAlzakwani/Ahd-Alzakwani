@@ -23,33 +23,13 @@ import java.util.Set;
 import java.util.Stack;
 
 public class Main {
+
 	static int factorial(int n) {
 		if (n == 0)
 			return 1;
 		else
 			return (n * factorial(n - 1));
 	}
-	
-	public static void validDateUserName(String userName) throws IllegalArgumentException  
-	{
-		userName = "Ahd";
-		if(userName !="Ahd")
-		{
-			throw new IllegalArgumentException("*   Falid UserName Input   *");
-
-		}
-	}
-	public static void validDateUserPassword(int password) throws NumberFormatException  
-	{
-		int userpassword = 1234;
-		if(password !=userpassword)
-		{
-			throw new NumberFormatException("*   Falid UserPassword Input   *");
-
-		}
-	}
-
-
 
 	public static void main(String[] args) {
 //		Declaration Classes and List 
@@ -58,12 +38,11 @@ public class Main {
 		HashMap<Integer, String> menueOptions = new HashMap<Integer, String>();
 		HashMap<Integer, String> subMenueOptions = new HashMap<Integer, String>();
 		ArrayList<String> emailList = new ArrayList<>();
-		//ArrayList<String> fileList = new ArrayList<>();
+		// ArrayList<String> fileList = new ArrayList<>();
 		ArrayList<School> schoolList = new ArrayList<>();
-		//ArrayList<Student> studentList = new ArrayList<>();
+		// ArrayList<Student> studentList = new ArrayList<>();
 		HashMap<String, Double> studentFees = new HashMap<String, Double>();
 
-		
 		HashMap<String, HashMap<String, Double>> studentFeesWithCurrency = new HashMap<String, HashMap<String, Double>>();
 		FileOutputStream fileStudentName;
 		ObjectOutputStream fileStudentWrite = null;
@@ -71,16 +50,11 @@ public class Main {
 		FileOutputStream fileName;
 		ObjectInputStream fileRead = null;
 		ObjectOutputStream fileWrite = null;
-		
-		
-		
+
 		try {
 			fileName = new FileOutputStream("C:\\Users\\User009\\Desktop\\School\\history.txt");
 			fileWrite = new ObjectOutputStream(fileName);
-			fileRead = new ObjectInputStream(new FileInputStream(
-					"C:\\Users\\User009\\Desktop\\School\\history.txt"));
-			
-			
+			fileRead = new ObjectInputStream(new FileInputStream("C:\\Users\\User009\\Desktop\\School\\history.txt"));
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -108,26 +82,71 @@ public class Main {
 		System.out.println("*****************************");
 		System.out.println("*       HELOW TEACHER       *");
 		System.out.println("*****************************");
-		String inputTeacherName=null;
-		int inputTeacherPassword =0;
+		String inputTeacherName = null;
+		String inputTeacherPassword = null;
+		String teacherpass = "1234";
+		String teacherName = "Ahd";
+
 		while (teacherExit) {
 //			Teachers Details Inputs
+
+			
+			
 			try
 			{
 			System.out.println("Enter Teacher Name :");
-			 inputTeacherName = sa.next();
-			 validDateUserName(inputTeacherName);
-			 System.out.println("Enter Teacher Password :");
-			 inputTeacherPassword = sa.nextInt();
-			 validDateUserPassword(inputTeacherPassword);
-			 
-
+			inputTeacherName = sa.next();
+			inputTeacherName.matches("^[A-Za-z]*$");
+		    System.out.println("Falid String Format");
+			
+//			else
+//			{
+//				System.out.println("Not Falid String Format \n");
+//				teacherExit = true;
+//			}
+			}
+			catch(NumberFormatException e)
+			{
+				System.out.println("Not Falid String Format \n");
+				teacherExit = true;
+			}
+			
+			
+			
+			
+			
+			
+			
+			try
+			{
+			System.out.println("Enter Teacher Password :");
+			inputTeacherPassword = sa.next();
+			Integer.parseInt(inputTeacherPassword);
+			System.out.println("Falid Number Format");
+			}
+			catch(NumberFormatException e)
+			{
+				System.out.println("Not Falid Number Format \n");
+				teacherExit=true;
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			history.push(inputTeacherName);
-			String teacherName = "Ahd";
-			boolean teacherCheck = inputTeacherName.equals(teacherName);
-
-			if (teacherCheck == true) {
-				if (inputTeacherPassword == inputTeacherPassword) {
+			//boolean teacherCheck = inputTeacherName.equals(teacherName);
+            
+			if (inputTeacherName.matches(teacherName)) {
+				if (inputTeacherPassword.equals(teacherpass) ) {
 					do {
 						System.out.println("*****************************");
 						System.out.println("Welcom Ms :\t" + inputTeacherName);
@@ -443,9 +462,8 @@ public class Main {
 					} while (optionExit);
 
 				}
-				
-				else
-				{
+
+				else {
 					System.out.println("Wronge Password");
 
 				}
@@ -453,8 +471,9 @@ public class Main {
 			} else {
 				System.out.println("Wronge UserName  ");
 			}
+
 		}
 		teacherExit = false;
-	}
 
+	}
 }
