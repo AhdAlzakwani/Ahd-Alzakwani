@@ -162,6 +162,13 @@ public class Main {
 							System.out.println("*      STUDENT DETAILS      *");
 							System.out.println("*****************************");
 //				 Inserting Schools Details 
+							Student studentDetails = new Student();
+							System.out.println("Enter Your Age ?");
+							int inputStudentAge = sa.nextInt();
+							studentDetails.setStudentAge(inputStudentAge);
+							studentDetails.Age(inputStudentAge);
+							if(inputStudentAge> 3 && inputStudentAge <20)
+							{
 							while (schoolExit) {
 
 								School schoolDetails = new School();
@@ -188,7 +195,6 @@ public class Main {
 								hasExit = Boolean.TRUE;
 								String inputStudentName = null;
 								while (isExit) {
-									Student studentDetails = new Student();
 									System.out.println("Enter Student Name");
 									inputStudentName = sa.next();
 									history.push(inputStudentName);
@@ -350,7 +356,15 @@ public class Main {
 							} catch (IOException e) {
 								System.out.println(e.getMessage());
 							}
-
+							}
+							else
+							{
+								System.out.println("*****************************");
+								System.out.println("*      THANK YOU      *");
+								System.out.println("*****************************");
+								optionExit = false;
+								teacherExit = false;
+							}
 							break;
 						case "2":
 
@@ -360,7 +374,7 @@ public class Main {
 							for (School h : schoolList) {
 								System.out.println("\tSchool Name: " + h.getSchoolName());
 								for (Student s : h.studentList) {
-									System.out.println("\tStudent Name: \t" + s.getStudentName() + "\tStudent Email: \t"
+									System.out.println("\tStudent Name: \t" + s.getStudentName()+"\t Student Age: \t" +s.getStudentAge() +"\tStudent Email: \t"
 											+ s.getstudentEmail());
 									for (Course c : s.courseList) {
 										for (Marks m : c.getmarkList()) {
@@ -509,7 +523,7 @@ public class Main {
 							break;
 						case "7":
 							System.out.println("*****************************");
-							System.out.println("*      THANK YOU      *");
+							System.out.println("*         THANK YOU         *");
 							System.out.println("*****************************");
 							optionExit = false;
 							teacherExit = false;

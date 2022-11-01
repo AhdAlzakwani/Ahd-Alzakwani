@@ -2,14 +2,23 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Student implements Serializable
+public class Student implements StudentInterface, Serializable
 {
     private String studentName;
     private String studentEmail;
+    private int studentAge;
 	ArrayList<Course> courseList = new ArrayList<>();
 	
-	
-	
+	@Override
+	public void Age(int studentAge) {
+		if (studentAge > 3 && studentAge<20)
+		{
+			System.out.println("Student Allegeable to join");
+		}
+		else {	
+			System.out.println("Student unallegeable to join");
+		}
+		}
 	void setcourseList(ArrayList<Course> courseList)
 	{
 	this.courseList = courseList;	
@@ -19,7 +28,17 @@ public class Student implements Serializable
 		return courseList;
 	}
 	
-	
+	 public void setStudentAge(int studentAge)
+     {
+     	this.studentAge = studentAge;
+     }
+     int getStudentAge()
+     {
+     	return studentAge;
+     }
+     
+     
+     
 	
 	
         public void setStudentName(String studentName)
