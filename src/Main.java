@@ -144,48 +144,44 @@ public class Main {
 						System.out.println(menueOptions);
 						String option = null;
 						do {
-						try {
-							System.out.println("PLEASE SELECT ONLY ONE OPTION");
-							System.out.println("*****************************");
-							option = sa.next();
-							Integer.parseInt(option);
-							
-							chooseInputMnue = false;
-						} catch (NumberFormatException e) {
-							System.out.println("           Wroooong          ");
-							System.out.println("please select numbers Only \n");
-						}
-						}while(chooseInputMnue);
+							try {
+								System.out.println("PLEASE SELECT ONLY ONE OPTION");
+								System.out.println("*****************************");
+								option = sa.next();
+								Integer.parseInt(option);
+
+								chooseInputMnue = false;
+							} catch (NumberFormatException e) {
+								System.out.println("           Wroooong          ");
+								System.out.println("please select numbers Only \n");
+							}
+						} while (chooseInputMnue);
 						switch (option) {
 						case "1":
 							System.out.println("*****************************");
 							System.out.println("*      STUDENT DETAILS      *");
 							System.out.println("*****************************");
 //				 Inserting Schools Details 
-							
+
 							while (schoolExit) {
 
 								School schoolDetails = new School();
 
-									System.out.println("Enter School Name");
-									inputStudentSchool = sa.next();
-									schoolDetails.setSchoolName(inputStudentSchool);
-									history.push(inputStudentSchool);
-									
+								System.out.println("Enter School Name");
+								inputStudentSchool = sa.next();
+								schoolDetails.setSchoolName(inputStudentSchool);
+								history.push(inputStudentSchool);
+
 								try {
 									if (!inputStudentSchool.matches("^[A-Za-z]*$")) {
 										throw new Exception("\"\\\"*InFalid Format*\\\"\"");
 									}
-									
-								}catch(Exception e)
-								{
+
+								} catch (Exception e) {
 									System.out.println(e.getMessage());
 									continue;
 								}
 
-							
-								
-								
 								hasExit = Boolean.TRUE;
 								String inputStudentName = null;
 								String inputStudentLastName = null;
@@ -195,166 +191,169 @@ public class Main {
 									int inputStudentAge = sa.nextInt();
 									studentDetails.setStudentAge(inputStudentAge);
 									studentDetails.Age(inputStudentAge);
-									
-									if(inputStudentAge> 3 && inputStudentAge <20)
-									{
-									
-									System.out.println("Enter Student First Name");
-									inputStudentName = sa.next();
-									history.push(inputStudentName);
-									studentDetails.setStudentName(inputStudentName);
-									System.out.println("Enter Student Last Name");
-									inputStudentLastName = sa.next();
-									history.push(inputStudentLastName);
-									System.out.println(studentDetails.fullName(inputStudentName, inputStudentLastName));
-									
-									
-									
-									try {
-									 if(!inputStudentName.matches("^[A-Za-z]*$"))
-									 {
-										 throw new Exception("\"\\\"*InFalid Format*\\\"\"");
-										}
-									 
-									}catch(Exception e)
-									{
-										System.out.println(e.getMessage());
-										continue;
-									}
-									
-									String inputStudentEmail= null;
-									System.out.println("Enter Student Email");
-									 inputStudentEmail = sa.next();
-									history.push(inputStudentEmail);
-									studentDetails.setstudentEmail(inputStudentEmail);
-									emailList.add(inputStudentEmail);
-									
-									
-									try {
-									if(!inputStudentEmail.matches("^[A-Za-z0-9+_.-]+@(.+)$"))
-									 {
-										
-										 throw new Exception("\"\\\"*InFalid  Email Format*\\\"\"");
-									 }
-									}catch(Exception e)
-									{
-										System.out.println(e.getMessage());
-										continue;
-									}
 
-									while (isCurrencyExit) {
+									if (inputStudentAge > 3 && inputStudentAge < 20) {
+
+										System.out.println("Enter Student First Name");
+										inputStudentName = sa.next();
+										history.push(inputStudentName);
+										studentDetails.setStudentName(inputStudentName);
+										System.out.println("Enter Student Last Name");
+										inputStudentLastName = sa.next();
+										history.push(inputStudentLastName);
+										System.out.println(
+												studentDetails.fullName(inputStudentName, inputStudentLastName));
+
 										try {
-										System.out.println("Choose currency (1- BRL , 2- USD , 3- EUR)");
-										currency = sa.next();
-										currencyInput = Integer.parseInt(currency);
-										
-										System.out.println("Enter Student Amount");
-										amount = sa.nextInt();
-										// If Conditions
-										if (currencyInput == 1) {
-											nameCurrency = "BRL";
-											amountcal = amount * 13.69;
-										} else if (currencyInput == 2) {
-											nameCurrency = "USD";
-											amountcal = amount * 2.60;
-										} else if (currencyInput == 3) {
-											nameCurrency = "EUR";
-											amountcal = amount * 2.65;
-										} 
-										}catch(Exception e)
-										{
+											if (!inputStudentName.matches("^[A-Za-z]*$")) {
+												throw new Exception("\"\\\"*InFalid Format*\\\"\"");
+											}
+
+										} catch (Exception e) {
 											System.out.println(e.getMessage());
 											continue;
 										}
-										System.out.println("Student Amount" + amountcal);
 
-										studentFees.put(nameCurrency, amountcal);
-										studentFeesWithCurrency.put(studentDetails.getStudentName(), studentFees);
-										
-									
-										System.out.println("DO You want to Add Other Currency ? press 1");
-										int isExitCurrency = sa.nextInt();
-										if (isExitCurrency == 0) {
+										String inputStudentEmail = null;
+										System.out.println("Enter Student Email");
+										inputStudentEmail = sa.next();
+										history.push(inputStudentEmail);
+										studentDetails.setstudentEmail(inputStudentEmail);
+										emailList.add(inputStudentEmail);
+
+										try {
+											if (!inputStudentEmail.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+
+												throw new Exception("\"\\\"*Invalid  Email Format*\\\"\"");
+											}
+										} catch (Exception e) {
+											System.out.println(e.getMessage());
+											continue;
+										}
+
+										while (isCurrencyExit) {
+											try {
+												System.out.println("Choose currency (1- BRL , 2- USD , 3- EUR)");
+												currency = sa.next();
+												currencyInput = Integer.parseInt(currency);
+
+												System.out.println("Enter Student Amount");
+												amount = sa.nextInt();
+												// If Conditions
+												if (currencyInput == 1) {
+													nameCurrency = "BRL";
+													amountcal = amount * 13.69;
+												} else if (currencyInput == 2) {
+													nameCurrency = "USD";
+													amountcal = amount * 2.60;
+												} else if (currencyInput == 3) {
+													nameCurrency = "EUR";
+													amountcal = amount * 2.65;
+												}
+											} catch (Exception e) {
+												System.out.println(e.getMessage());
+												continue;
+											}
+											System.out.println("Student Amount" + amountcal);
+
+											studentFees.put(nameCurrency, amountcal);
+											studentFeesWithCurrency.put(studentDetails.getStudentName(), studentFees);
+
+											System.out.println("DO You want to Add Other Currency ? press 1");
+											int isExitCurrency = sa.nextInt();
+											if (isExitCurrency == 0) {
+												isCurrencyExit = false;
+											}
+
+										}
+
+										hasExit = Boolean.TRUE;
+										while (hasExit) {
+											Course studentCourse = new Course();
+											System.out.println("Enter Course Name \n");
+											String inputCourseName = sa.next();
+											history.push(inputCourseName);
+											studentCourse.setcourseName(inputCourseName);
+
+											try {
+												if (!inputCourseName.matches("^[A-Za-z]*$")) {
+													throw new Exception("\"\\\"*Invalid Course Format*\\\"\"");
+												}
+
+											} catch (Exception e) {
+												System.out.println(e.getMessage());
+												continue;
+											}
+
+											try {
+												Marks courseMarks = new Marks();
+												System.out.println("Enter Mark for Course :");
+												int inputCourseMark = sa.nextInt();
+												String iinputCourseMark = String.valueOf(inputCourseMark);
+												history.push(iinputCourseMark);
+												courseMarks.setCourseMark(inputCourseMark);
+												studentCourse.markList.add(courseMarks);
+												studentDetails.courseList.add(studentCourse);
+												courseMarks.marksDegree(inputCourseMark);
+												
+											} catch (Exception e) {
+												System.out.println(e.getMessage());
+												continue;
+											}
+
+											System.out.println("Do You want To Add course press 1 if not press 0");
+											int exitoutput = sa.nextInt();
+
+											if (exitoutput == 0)
+
+												hasExit = false;
+										}
+										schoolList.add(schoolDetails);
+										schoolDetails.studentList.add(studentDetails);
+
+										try {
+
+											System.out.println("Stack POP: " + history);
+											fileWrite.writeObject(history);
+
+										} catch (IOException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+
+										System.out.println("Do You want To Add Student press 1 ");
+										int exitStudentOutput = sa.nextInt();
+										if (exitStudentOutput == 1) {
+											isExit = true;
+											isCurrencyExit = true;
+										} else {
+											isExit = false;
+											isCurrencyExit = false;
+										}
+									}
+
+									else {
+										System.out.println("Do Yo want to Add Student press 1");
+										int userAddStudents = sa.nextInt();
+										if (userAddStudents == 1) {
+											isExit = true;
+											hasExit = true;
+											isCurrencyExit = true;
+										}
+										if (userAddStudents == 0) {
+											System.out.println("*****************************");
+											System.out.println("*      THANK YOU      *");
+											System.out.println("*****************************");
+											optionExit = false;
+											teacherExit = false;
+											isExit = false;
+											hasExit = false;
 											isCurrencyExit = false;
 										}
 
 									}
-
-									hasExit = Boolean.TRUE;
-									while (hasExit) {
-										Course studentCourse = new Course();
-										Marks courseMarks = new Marks();
-										System.out.println("Enter Course Name \n");
-										String inputCourseName = sa.next();
-										history.push(inputCourseName);
-										studentCourse.setcourseName(inputCourseName);
-										
-										try {
-											if (!inputCourseName.matches("^[A-Za-z]*$")) {
-												throw new Exception("\"\\\"*InFalid Course Format*\\\"\"");
-											}
-											
-										}catch(Exception e)
-										{
-											System.out.println(e.getMessage());
-											continue;
-										}
-										
-										try {
-										System.out.println("Enter Mark for Course :");
-										int inputCourseMark = sa.nextInt();
-										String iinputCourseMark = String.valueOf(inputCourseMark);
-										history.push(iinputCourseMark);
-										courseMarks.setCourseMark(inputCourseMark);
-										studentCourse.markList.add(courseMarks);
-										studentDetails.courseList.add(studentCourse);
-										}catch(Exception e)
-										{
-											System.out.println(e.getMessage());
-											continue;
-										}
-
-										System.out.println("Do You want To Add course press 1 if not press 0");
-										int exitoutput = sa.nextInt();
-
-										if (exitoutput == 0)
-
-											hasExit = false;
-									}
-									schoolList.add(schoolDetails);
-									schoolDetails.studentList.add(studentDetails);
-
-									try {
-
-										System.out.println("Stack POP: " + history);
-										fileWrite.writeObject(history);
-
-									} catch (IOException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-
-									System.out.println("Do You want To Add Student press 1 ");
-									int exitStudentOutput = sa.nextInt();
-									if (exitStudentOutput == 1) {
-										isExit = true;
-										isCurrencyExit = true;
-									} else {
-										isExit = false;
-										isCurrencyExit = false;
-									}
 								}
-								
-									else
-									{
-										System.out.println("*****************************");
-										System.out.println("*      THANK YOU      *");
-										System.out.println("*****************************");
-										optionExit = false;
-										teacherExit = false;
-									}
-								}
-									
+
 								System.out.println("Do You want To Add School press 1 ");
 								int exitSchoolOutput = sa.nextInt();
 								if (exitSchoolOutput == 1) {
@@ -368,20 +367,16 @@ public class Main {
 									isExit = false;
 									hasExit = false;
 									optionExit = true;
-									
+
 								}
-								
 
-							
-								
+								try {
+									fileWrite.writeObject(history);
+								} catch (IOException e) {
+									System.out.println(e.getMessage());
+								}
+							}
 
-							try {
-								fileWrite.writeObject(history);
-							} catch (IOException e) {
-								System.out.println(e.getMessage());
-							}
-							}
-							
 							break;
 						case "2":
 
@@ -391,8 +386,8 @@ public class Main {
 							for (School h : schoolList) {
 								System.out.println("School Name: " + h.getSchoolName());
 								for (Student s : h.studentList) {
-									System.out.println("Student Name: \t" + s.getStudentName()+"\t Student Age: \t" +s.getStudentAge() +"\tStudent Email: \t"
-											+ s.getstudentEmail());
+									System.out.println("Student Name: \t" + s.getStudentName() + "\t Student Age: \t"
+											+ s.getStudentAge() + "\tStudent Email: \t" + s.getstudentEmail());
 									for (Course c : s.courseList) {
 										for (Marks m : c.getmarkList()) {
 											System.out.println("Course Name: " + c.getcourseName() + " \tCourse Marks"
@@ -412,7 +407,7 @@ public class Main {
 							try {
 								Stack<String> st = (Stack<String>) fileRead.readObject();
 								System.out.println(st);
-							} catch (ClassNotFoundException | IOException e) {
+							} catch (Exception e) {
 								System.out.println(e.getMessage());
 							}
 
