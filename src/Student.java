@@ -19,6 +19,10 @@ public class Student implements StudentInterface, Serializable
 			System.out.println("Student unallegeable to join");
 		}
 		}
+	
+	
+		
+	
 	void setcourseList(ArrayList<Course> courseList)
 	{
 	this.courseList = courseList;	
@@ -67,6 +71,14 @@ public class Student implements StudentInterface, Serializable
 			this.studentEmail = studentEmail;
 			this.studentName = studentName;
 			
+		}
+
+		@Override
+		public String fullName(String fName, String LName) {
+			String fullStudentName = fName+" "+LName;
+			
+			// TODO Auto-generated method stub
+			return fullStudentName;
 		}
 
 

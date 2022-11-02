@@ -162,13 +162,7 @@ public class Main {
 							System.out.println("*      STUDENT DETAILS      *");
 							System.out.println("*****************************");
 //				 Inserting Schools Details 
-							Student studentDetails = new Student();
-							System.out.println("Enter Your Age ?");
-							int inputStudentAge = sa.nextInt();
-							studentDetails.setStudentAge(inputStudentAge);
-							studentDetails.Age(inputStudentAge);
-							if(inputStudentAge> 3 && inputStudentAge <20)
-							{
+							
 							while (schoolExit) {
 
 								School schoolDetails = new School();
@@ -189,16 +183,31 @@ public class Main {
 									continue;
 								}
 
-								
+							
 								
 								
 								hasExit = Boolean.TRUE;
 								String inputStudentName = null;
+								String inputStudentLastName = null;
 								while (isExit) {
-									System.out.println("Enter Student Name");
+									Student studentDetails = new Student();
+									System.out.println("Enter Student Age ?");
+									int inputStudentAge = sa.nextInt();
+									studentDetails.setStudentAge(inputStudentAge);
+									studentDetails.Age(inputStudentAge);
+									
+									if(inputStudentAge> 3 && inputStudentAge <20)
+									{
+									
+									System.out.println("Enter Student First Name");
 									inputStudentName = sa.next();
 									history.push(inputStudentName);
 									studentDetails.setStudentName(inputStudentName);
+									System.out.println("Enter Student Last Name");
+									inputStudentLastName = sa.next();
+									history.push(inputStudentLastName);
+									System.out.println(studentDetails.fullName(inputStudentName, inputStudentLastName));
+									
 									
 									
 									try {
@@ -335,6 +344,17 @@ public class Main {
 										isCurrencyExit = false;
 									}
 								}
+								
+									else
+									{
+										System.out.println("*****************************");
+										System.out.println("*      THANK YOU      *");
+										System.out.println("*****************************");
+										optionExit = false;
+										teacherExit = false;
+									}
+								}
+									
 								System.out.println("Do You want To Add School press 1 ");
 								int exitSchoolOutput = sa.nextInt();
 								if (exitSchoolOutput == 1) {
@@ -347,9 +367,13 @@ public class Main {
 									schoolExit = false;
 									isExit = false;
 									hasExit = false;
+									optionExit = true;
+									
 								}
+								
 
-							}
+							
+								
 
 							try {
 								fileWrite.writeObject(history);
@@ -357,14 +381,7 @@ public class Main {
 								System.out.println(e.getMessage());
 							}
 							}
-							else
-							{
-								System.out.println("*****************************");
-								System.out.println("*      THANK YOU      *");
-								System.out.println("*****************************");
-								optionExit = false;
-								teacherExit = false;
-							}
+							
 							break;
 						case "2":
 
@@ -372,13 +389,13 @@ public class Main {
 							System.out.println("*      STUDENT REPORT      *");
 							System.out.println("*****************************");
 							for (School h : schoolList) {
-								System.out.println("\tSchool Name: " + h.getSchoolName());
+								System.out.println("School Name: " + h.getSchoolName());
 								for (Student s : h.studentList) {
-									System.out.println("\tStudent Name: \t" + s.getStudentName()+"\t Student Age: \t" +s.getStudentAge() +"\tStudent Email: \t"
+									System.out.println("Student Name: \t" + s.getStudentName()+"\t Student Age: \t" +s.getStudentAge() +"\tStudent Email: \t"
 											+ s.getstudentEmail());
 									for (Course c : s.courseList) {
 										for (Marks m : c.getmarkList()) {
-											System.out.println("\nCourse Name: " + c.getcourseName() + " \tCourse Marks"
+											System.out.println("Course Name: " + c.getcourseName() + " \tCourse Marks"
 													+ m.getCourseMark());
 										}
 									}
