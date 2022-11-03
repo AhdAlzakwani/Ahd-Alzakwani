@@ -39,6 +39,26 @@ public class Main {
 		System.out.println("PLEASE SELECT ONLY ONE OPTION");
 		System.out.println("*****************************");
 	}
+	
+	public static void schoolInput() throws Throwable
+	{
+		Stack<String> history = new Stack<String>();
+		Scanner sa = new Scanner(System.in);
+		School schoolDetails = new School();
+		schoolDetails.finalize();
+		System.out.println("Enter School Name");
+		String inputStudentSchool = sa.next();
+		schoolDetails.setSchoolName(inputStudentSchool);
+		history.push(inputStudentSchool);
+		try {
+			if (!inputStudentSchool.matches("^[A-Za-z]*$")) {
+				throw new Exception("\"\\\"*InFalid Format*\\\"\"");
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 
 	
 	public static void main(String[] args) throws Throwable {
@@ -53,9 +73,7 @@ public class Main {
 		HashMap<String, Double> studentFees = new HashMap<String, Double>();
 
 		HashMap<String, HashMap<String, Double>> studentFeesWithCurrency = new HashMap<String, HashMap<String, Double>>();
-		FileOutputStream fileStudentName;
-		ObjectOutputStream fileStudentWrite = null;
-		ObjectInputStream fileStudentRead = null;
+		
 		FileOutputStream fileName;
 		ObjectInputStream fileRead = null;
 		ObjectOutputStream fileWrite = null;
@@ -72,7 +90,7 @@ public class Main {
 
 		Scanner sa = new Scanner(System.in);
 		Scanner san = new Scanner(System.in);
-		School ourSchool = new School();
+		School schoolDetails = new School();
 		Course studentCoursee = new Course();
 		Marks courseMarkss = new Marks();
 		String currency = null;
@@ -175,22 +193,9 @@ public class Main {
 
 							while (schoolExit) {
 
-								School schoolDetails = new School();
-								schoolDetails.finalize();
-								System.out.println("Enter School Name");
-								inputStudentSchool = sa.next();
-								schoolDetails.setSchoolName(inputStudentSchool);
-								history.push(inputStudentSchool);
+								schoolInput();
 
-								try {
-									if (!inputStudentSchool.matches("^[A-Za-z]*$")) {
-										throw new Exception("\"\\\"*InFalid Format*\\\"\"");
-									}
-
-								} catch (Exception e) {
-									System.out.println(e.getMessage());
-									continue;
-								}
+								
 
 								hasExit = Boolean.TRUE;
 								String inputStudentName = null;
@@ -464,10 +469,12 @@ public class Main {
 									System.out.println("Please Enter Number :");
 									System.out.println("*********************");
 									int FactorialNum = sa.nextInt();
-
 									fact = fCalculate.factorial(FactorialNum);
 									System.out.println("Factorial of " + FactorialNum + " is: " + fact);
 
+									
+									
+									
 									break;
 								case 2:
 
@@ -476,45 +483,17 @@ public class Main {
 									int count = sa.nextInt();
 									fibo.FibonacciCalculate(count);
 									break;
+									
+									
+									
 								case 3:
-									Student student1 = new Student("Ahd", "Ahd@gmail.com");
-									Student student2 = new Student("Amaal", "Amaal@gmail.com");
-									Student student3 = new Student("Amna", "Amna@hotmail.com");
-
-									try {
-										fileStudentName = new FileOutputStream(
-												"C:\\Users\\User009\\Desktop\\School\\studentsDetails.txt");
-										fileStudentWrite = new ObjectOutputStream(fileStudentName);
-										fileStudentRead = new ObjectInputStream(new FileInputStream(
-												"C:\\Users\\User009\\Desktop\\School\\studentsDetails.txt"));
-
-										fileStudentWrite.writeObject(student1);
-										fileStudentWrite.writeObject(student2);
-										fileStudentWrite.writeObject(student3);
-										fileStudentWrite.flush();
-										fileStudentWrite.close();
-
-										Student s1 = (Student) fileStudentRead.readObject();
-										Student s2 = (Student) fileStudentRead.readObject();
-										Student s3 = (Student) fileStudentRead.readObject();
-
-										System.out.println("Student Name: " + s1.getStudentName() + "Student Mail: "
-												+ s1.getstudentEmail());
-										System.out.println("Student Name: " + s2.getStudentName() + "Student Mail: "
-												+ s2.getstudentEmail());
-										System.out.println("Student Name: " + s3.getStudentName() + "Student Mail: "
-												+ s3.getstudentEmail());
-
-									} catch (IOException e) {
-										System.out.println(e.getMessage());
-									}
-
-									catch (ClassNotFoundException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-
+									StudentSeriliable studentSer = new StudentSeriliable();
+									studentSer.studentSerializable();
 									break;
+									
+									
+									
+									
 								case 4:
 									isSubExit = false;
 									break;

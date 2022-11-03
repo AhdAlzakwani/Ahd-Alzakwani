@@ -15,7 +15,6 @@ public class Fibonacci {
 				inputusers1 = inputusers2;
 				inputusers2 = inputusers3;
 	}
-//			System.out.print(inputusers1 + " " + inputusers2);// printing 0 and 1
 
 }
 		return count;
