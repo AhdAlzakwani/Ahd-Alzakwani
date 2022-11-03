@@ -31,7 +31,7 @@ public class Main {
 			return (n * factorial(n - 1));
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Throwable {
 //		Declaration Classes and List 
 		Set<String> emailSet = new HashSet<>();
 		Stack<String> history = new Stack<String>();
@@ -107,6 +107,7 @@ public class Main {
 				System.out.println("Not Falid String Format \n");
 				System.out.println("Enter Teacher Name :");
 				inputTeacherName = sa.next();
+				
 				// teacherExit = true;
 			}
 
@@ -187,6 +188,7 @@ public class Main {
 								String inputStudentLastName = null;
 								while (isExit) {
 									Student studentDetails = new Student();
+									studentDetails.finalize();
 									System.out.println("Enter Student Age ?");
 									int inputStudentAge = sa.nextInt();
 									studentDetails.setStudentAge(inputStudentAge);

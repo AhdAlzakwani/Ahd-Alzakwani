@@ -6,6 +6,25 @@ public class Student implements StudentInterface, Serializable {
 	private String studentEmail;
 	private int studentAge;
 	ArrayList<Course> courseList = new ArrayList<>();
+	protected void finalize() throws Throwable
+    {
+        try {
+ 
+            System.out.println("inside demo's finalize()");
+        }
+        catch (Throwable e) {
+ 
+            throw e;
+        }
+        finally {
+ 
+            System.out.println("Calling finalize method"
+                               + " of the Object class");
+ 
+            // Calling finalize() of Object class
+            super.finalize();
+        }
+    }
 
 	@Override
 	public void Age(int studentAge) {
