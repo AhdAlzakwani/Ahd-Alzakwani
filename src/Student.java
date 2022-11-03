@@ -6,6 +6,7 @@ public class Student implements StudentInterface, Serializable {
 	private String studentEmail;
 	private int studentAge;
 	ArrayList<Course> courseList = new ArrayList<>();
+	
 	protected void finalize() throws Throwable
     {
         try {
@@ -19,7 +20,7 @@ public class Student implements StudentInterface, Serializable {
         finally {
  
             System.out.println("Calling finalize method"
-                               + " of the Object class");
+                               + " of the Student Object class");
  
             // Calling finalize() of Object class
             super.finalize();

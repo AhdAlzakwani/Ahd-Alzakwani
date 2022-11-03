@@ -23,20 +23,29 @@ import java.util.Set;
 import java.util.Stack;
 
 public class Main {
-
-	static int factorial(int n) {
-		if (n == 0)
-			return 1;
-		else
-			return (n * factorial(n - 1));
+	
+	public static void subMenue()
+	{
+		Scanner sa = new Scanner(System.in);
+		HashMap<Integer, String> subMenueOptions = new HashMap<Integer, String>();
+		System.out.println("*****************************");
+		System.out.println("*   WELCOME TO SUB PROBLEM   *");
+		System.out.println("*****************************");
+		subMenueOptions.put(1, " FECTORIAL \n");
+		subMenueOptions.put(2, " Fibonac \n");
+		subMenueOptions.put(3, " Student Serilization \n");
+		subMenueOptions.put(4, " Back \n");
+		System.out.println(subMenueOptions);
+		System.out.println("PLEASE SELECT ONLY ONE OPTION");
+		System.out.println("*****************************");
 	}
 
+	
 	public static void main(String[] args) throws Throwable {
 //		Declaration Classes and List 
 		Set<String> emailSet = new HashSet<>();
 		Stack<String> history = new Stack<String>();
 		HashMap<Integer, String> menueOptions = new HashMap<Integer, String>();
-		HashMap<Integer, String> subMenueOptions = new HashMap<Integer, String>();
 		ArrayList<String> emailList = new ArrayList<>();
 		// ArrayList<String> fileList = new ArrayList<>();
 		ArrayList<School> schoolList = new ArrayList<>();
@@ -167,7 +176,7 @@ public class Main {
 							while (schoolExit) {
 
 								School schoolDetails = new School();
-
+								schoolDetails.finalize();
 								System.out.println("Enter School Name");
 								inputStudentSchool = sa.next();
 								schoolDetails.setSchoolName(inputStudentSchool);
@@ -272,6 +281,7 @@ public class Main {
 										hasExit = Boolean.TRUE;
 										while (hasExit) {
 											Course studentCourse = new Course();
+											studentCourse.finalize();
 											System.out.println("Enter Course Name \n");
 											String inputCourseName = sa.next();
 											history.push(inputCourseName);
@@ -289,6 +299,7 @@ public class Main {
 
 											try {
 												Marks courseMarks = new Marks();
+												courseMarks.finalize();
 												System.out.println("Enter Mark for Course :");
 												int inputCourseMark = sa.nextInt();
 												String iinputCourseMark = String.valueOf(inputCourseMark);
@@ -444,50 +455,26 @@ public class Main {
 						case "6":
 							do {
 
-								System.out.println("*****************************");
-								System.out.println("*   WELCOME TO SUB PROBLEM   *");
-								System.out.println("*****************************");
-								subMenueOptions.put(1, " FECTORIAL \n");
-								subMenueOptions.put(2, " Fibonac \n");
-								subMenueOptions.put(3, " Student Serilization \n");
-								subMenueOptions.put(4, " Back \n");
-								System.out.println(subMenueOptions);
-								System.out.println("PLEASE SELECT ONLY ONE OPTION");
-								System.out.println("*****************************");
+								subMenue();
 								int subOption = sa.nextInt();
-
 								switch (subOption) {
 								case 1:
-
+									Factorial fCalculate = new Factorial();
 									int i, fact = 1;
 									System.out.println("Please Enter Number :");
 									System.out.println("*********************");
 									int FactorialNum = sa.nextInt();
 
-									fact = factorial(FactorialNum);
+									fact = fCalculate.factorial(FactorialNum);
 									System.out.println("Factorial of " + FactorialNum + " is: " + fact);
 
 									break;
 								case 2:
 
-									int inputusers1 = 0;
-									int inputusers2 = 1;
+									Fibonacci fibo = new Fibonacci();
 									System.out.println("Please Enter Count number :");
 									int count = sa.nextInt();
-
-									int inputusers3;
-									System.out.print(inputusers1 + " " + inputusers2);// printing 0 and 1
-
-									for (int m = 2; m < count; ++m) {
-
-										inputusers3 = inputusers1 + inputusers2;
-										if (inputusers3 <= 100) {
-											System.out.print(" " + inputusers3 + " ");
-											inputusers1 = inputusers2;
-											inputusers2 = inputusers3;
-										}
-
-									}
+									fibo.FibonacciCalculate(count);
 									break;
 								case 3:
 									Student student1 = new Student("Ahd", "Ahd@gmail.com");
