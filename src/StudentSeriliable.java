@@ -7,14 +7,14 @@ import java.io.ObjectOutputStream;
 public class StudentSeriliable {
 	public static void studentSerializable()
 	{
-		FileOutputStream fileStudentName;
+		
 		ObjectOutputStream fileStudentWrite = null;
 		ObjectInputStream fileStudentRead = null;
 		Student student1 = new Student("Ahd", "Ahd@gmail.com");
 		Student student2 = new Student("Amaal", "Amaal@gmail.com");
 		Student student3 = new Student("Amna", "Amna@hotmail.com");
 		try {
-			fileStudentName = new FileOutputStream(
+			FileOutputStream fileStudentName = new FileOutputStream(
 					"C:\\Users\\User009\\Desktop\\School\\studentsDetails.txt");
 			fileStudentWrite = new ObjectOutputStream(fileStudentName);
 			fileStudentRead = new ObjectInputStream(new FileInputStream(
