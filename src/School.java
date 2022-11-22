@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.io.Serializable;
 
 public class School {
 	private String schoolName;

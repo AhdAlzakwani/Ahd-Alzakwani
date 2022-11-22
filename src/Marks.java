@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Marks implements MarkInterface{
 	private int courseMark;
 	
