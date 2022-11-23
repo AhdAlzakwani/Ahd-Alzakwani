@@ -30,7 +30,21 @@ public class Main {
 		System.out.println("*****************************");
 	}
 	
-
+	public static void apiMenue()
+	{
+		Scanner sa = new Scanner(System.in);
+		HashMap<Integer, String> apiMenueOptions = new HashMap<Integer, String>();
+		System.out.println("*****************************");
+		System.out.println("*   WELCOME TO API PROBLEM   *");
+		System.out.println("*****************************");
+		apiMenueOptions.put(1, " Multiple Users \n");
+		apiMenueOptions.put(2, " Pagination \n");
+		apiMenueOptions.put(3, " Passwords \n");
+		apiMenueOptions.put(4, " Seeding \n");
+		System.out.println(apiMenueOptions);
+		System.out.println("PLEASE SELECT ONLY ONE OPTION");
+		System.out.println("*****************************");
+	}
 	
     
 	
@@ -38,35 +52,271 @@ public class Main {
 	
 	public static void main(String[] args)
 			throws Throwable {
-		
-		URL url =  new URL("https://randomuser.me/api/");
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();	
-		conn.setRequestMethod("GET");
-		conn.connect();
-		StringBuilder informationString = new StringBuilder();
-		int responseCode = conn.getResponseCode();
-		if(responseCode != 200)
-		{
-			throw new RuntimeException("HttpresponseCode");
+		boolean userExit = true;
+		boolean menuExit = true;
+		Scanner scanner1 = new Scanner(System.in);
+
+		while(menuExit) {
 			
-		}else {
-			Scanner scanner = new Scanner(url.openStream());
-			while(scanner.hasNext()) {
-				informationString.append(scanner.nextLine());
+			apiMenue();
+			Integer option = scanner1.nextInt();
+			switch(option) {
+			case 1:
+				while(userExit){
+					try {
+					System.out.println("Enter How Many Users You Want To Display ? ");
+					Integer users = scanner1.nextInt();
+					if(users == 0)
+					{
+						
+						URL url =  new URL("https://randomuser.me/api/?results=30");
+						HttpURLConnection conn = (HttpURLConnection) url.openConnection();	
+						conn.setRequestMethod("GET");
+						conn.connect();
+						StringBuilder informationString = new StringBuilder();
+						int responseCode = conn.getResponseCode();
+						if(responseCode != 200)
+						{
+							throw new RuntimeException("HttpresponseCode");
+							
+						}else {
+							Scanner scanner = new Scanner(url.openStream());
+							while(scanner.hasNext()) {
+								informationString.append(scanner.nextLine());
+							}
+							scanner.close();
+							System.out.println(informationString);
+							
+							Gson gson = new Gson();
+							
+							RandomUserAPI result= gson.fromJson(informationString.toString(), RandomUserAPI.class);
+							for(int k =0; k<informationString.length(); k++ )
+							{
+								
+								System.out.println("User "+ k);
+							System.out.println(" ***************************** "+"|");
+							System.out.println("|"+"The Name Is : "+result.getResults().get(k).getName().getFirstName()+" "
+							+result.getResults().get(k).getName().getLastName());
+							System.out.println("|"+"The Cell Is : "+result.getResults().get(0).getCell());
+							System.out.println("|"+"The Email Is : "+result.getResults().get(0).getEmail());
+							System.out.println("|"+"The Gender Is : "+result.getResults().get(0).getGender());
+							System.out.println("|"+"The Phone Is : "+result.getResults().get(0).getPhone());
+							System.out.println("|"+" ***************************** "+"|");
+							
+							}
+							
+						}
+					}
+					
+					else {
+				    
+					for(int i=0; i < users; i++)
+					{
+					URL url =  new URL("https://randomuser.me/api/");
+					HttpURLConnection conn = (HttpURLConnection) url.openConnection();	
+					conn.setRequestMethod("GET");
+					conn.connect();
+					StringBuilder informationString = new StringBuilder();
+					int responseCode = conn.getResponseCode();
+					if(responseCode != 200)
+					{
+						throw new RuntimeException("HttpresponseCode");
+						
+					}else {
+						Scanner scanner = new Scanner(url.openStream());
+						while(scanner.hasNext()) {
+							informationString.append(scanner.nextLine());
+						}
+						scanner.close();
+						//System.out.println(informationString);
+					}
+					
+					
+					Gson gson = new Gson();
+					Integer m = i+1;
+					System.out.println("User "+ m);
+					RandomUserAPI result= gson.fromJson(informationString.toString(), RandomUserAPI.class);
+					System.out.println(" ***************************** "+"|");
+					System.out.println("|"+"The Name Is : "+result.getResults().get(0).getName().getFirstName()+" "+result.getResults().get(0).getName().getLastName());
+					System.out.println("|"+"The Cell Is : "+result.getResults().get(0).getCell());
+					System.out.println("|"+"The Email Is : "+result.getResults().get(0).getEmail());
+					System.out.println("|"+"The Gender Is : "+result.getResults().get(0).getGender());
+					System.out.println("|"+"The Phone Is : "+result.getResults().get(0).getPhone());
+					System.out.println("|"+" ***************************** "+"|");
+
+					}
+					
+					}
+					
+					}
+					catch(Exception e)
+					{
+						System.out.println(e);
+
+					}
+					System.out.println("Do You want to continue ? press 1 if not press 0");
+					Scanner scanner3 = new Scanner(System.in);
+					Integer con = scanner3.nextInt();
+					if(con ==0)
+					{
+						userExit = false;
+						menuExit = true;
+						
+					}
+					else
+					{
+						userExit = true;
+						menuExit = false;	
+					}
+					
+					}userExit = false;
+				
+				break;
+			case 2:
+//				System.out.println("Enter How Many Users You Want To Display ? ");
+//				Integer users = scanner1.nextInt();
+				System.out.println("Enter Number of pages ? ");
+				Integer pages = scanner1.nextInt();
+				System.out.println("Enter Number of Results ? ");
+				Integer resultss = scanner1.nextInt();
+				System.out.println("Enter Number of Seed ? ");
+				String Seed = scanner1.next();
+				System.out.println("Enter Number of Seed ? ");
+				String gender = scanner1.next();
+				URL url =  new URL("https://randomuser.me/api/?page="+pages+"&results="+resultss+"&seed="+Seed+"?gender="+gender);
+				HttpURLConnection conn = (HttpURLConnection) url.openConnection();	
+				conn.setRequestMethod("GET");
+				conn.connect();
+				StringBuilder informationString = new StringBuilder();
+				int responseCode = conn.getResponseCode();
+				if(responseCode != 200)
+				{
+					throw new RuntimeException("HttpresponseCode");
+					
+				}else {
+					Scanner scanner = new Scanner(url.openStream());
+					while(scanner.hasNext()) {
+						informationString.append(scanner.nextLine());
+					}
+					scanner.close();
+					//System.out.println(informationString);
+					
+					Gson gson = new Gson();
+					
+					RandomUserAPI result= gson.fromJson(informationString.toString(), RandomUserAPI.class);
+					for(int i=0; i < resultss; i++)
+					{
+					System.out.println(" ***************************** "+"|");
+					System.out.println("|"+"The Name Is : "+result.getResults().get(i).getName().getFirstName()+" "+result.getResults().get(0).getName().getLastName());
+					System.out.println("|"+"The Cell Is : "+result.getResults().get(i).getCell());
+					System.out.println("|"+"The Email Is : "+result.getResults().get(i).getEmail());
+					System.out.println("|"+"The Gender Is : "+result.getResults().get(i).getGender());
+					System.out.println("|"+" ***************************** "+"|");
+					}
+					
+					
+				}
+
+					menuExit = true;	
+				
+				
+				
+				
+				
+				break;
+			case 3:
+				System.out.println("Enter Password ? ");
+				String pass = scanner1.next();
+				
+	
+				URL url1 =  new URL("https://randomuser.me/api/?password="+pass);
+				HttpURLConnection conn1 = (HttpURLConnection) url1.openConnection();	
+				conn1.setRequestMethod("GET");
+				conn1.connect();
+				StringBuilder informationString1 = new StringBuilder();
+				int responseCode1 = conn1.getResponseCode();
+				if(responseCode1 != 200)
+				{
+					throw new RuntimeException("HttpresponseCode");
+					
+				}else {
+					Scanner scanner = new Scanner(url1.openStream());
+					while(scanner.hasNext()) {
+						informationString1.append(scanner.nextLine());
+					}
+					scanner.close();
+					//System.out.println(informationString);
+					
+					Gson gson = new Gson();
+					
+					RandomUserAPI result= gson.fromJson(informationString1.toString(), RandomUserAPI.class);
+//					for(int i=0; i < informationString1.length(); i++)
+//					{
+					System.out.println(" ***************************** "+"|");
+					System.out.println("|"+"The Name Is : "+result.getResults().get(0).getName().getFirstName()+" "+result.getResults().get(0).getName().getLastName());
+					System.out.println("|"+"The Cell Is : "+result.getResults().get(0).getCell());
+					System.out.println("|"+"The Email Is : "+result.getResults().get(0).getEmail());
+					System.out.println("|"+"The Gender Is : "+result.getResults().get(0).getGender());
+					System.out.println("|"+"The Password Is : "+result.getResults().get(0).getLogin().getPassword());
+					System.out.println("|"+" ***************************** "+"|");
+					}
+				break;
+			case 4:
+				
+				System.out.println("Enter Seed ? ");
+				String Seeds1 = scanner1.next();
+				
+	
+				URL url2 =  new URL("https://randomuser.me/api/?&seed="+Seeds1);
+				HttpURLConnection conn2 = (HttpURLConnection) url2.openConnection();	
+				conn2.setRequestMethod("GET");
+				conn2.connect();
+				StringBuilder informationString2 = new StringBuilder();
+				int responseCode2 = conn2.getResponseCode();
+				if(responseCode2 != 200)
+				{
+					throw new RuntimeException("HttpresponseCode");
+					
+				}else {
+					Scanner scanner = new Scanner(url2.openStream());
+					while(scanner.hasNext()) {
+						informationString2.append(scanner.nextLine());
+					}
+					scanner.close();
+					//System.out.println(informationString);
+					
+					Gson gson = new Gson();
+					
+					RandomUserAPI result= gson.fromJson(informationString2.toString(), RandomUserAPI.class);
+//					for(int i=0; i < informationString1.length(); i++)
+//					{
+					System.out.println(" ***************************** "+"|");
+					System.out.println("|"+"The Name Is : "+result.getResults().get(0).getName().getFirstName()+" "+result.getResults().get(0).getName().getLastName());
+					System.out.println("|"+"The Cell Is : "+result.getResults().get(0).getCell());
+					System.out.println("|"+"The Email Is : "+result.getResults().get(0).getEmail());
+					System.out.println("|"+"The Gender Is : "+result.getResults().get(0).getGender());
+					System.out.println("|"+"The Page Is : "+result.getInfo().getPage());
+					System.out.println("|"+"The Results Is : "+result.getInfo().getResults());
+					System.out.println("|"+"The Seed Is : "+result.getInfo().getSeed());
+					System.out.println("|"+" ***************************** "+"|");
+					}
+					
+					
+				//}
+
+					menuExit = true;	
+				
+				break;
+			
 			}
-			scanner.close();
-			System.out.println(informationString);
+			
 		}
 		
 		
-		Gson gson = new Gson();
-		RandomUserAPI result= gson.fromJson(informationString.toString(), RandomUserAPI.class);
-		System.out.println(result.getResults().get(0).getCell());
-
 		
 		
 		
-	
+		
 		
 		
 		/*

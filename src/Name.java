@@ -2,25 +2,25 @@
 
 
 public class Name {
-	private String titleName;
-	private String firstName;
-	private String lastName;
+	private String title;
+	private String first;
+	private String last;
 	public String getTitleName() {
-		return titleName;
+		return title;
 	}
-	public void setTitleName(String titleName) {
-		this.titleName = titleName;
+	public void setTitleName(String title) {
+		this.title = title;
 	}
 	public String getFirstName() {
-		return firstName;
+		return first;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFirstName(String first) {
+		this.first = first;
 	}
 	public String getLastName() {
-		return lastName;
+		return last;
 	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setLastName(String last) {
+		this.last = last;
 	}
 }
