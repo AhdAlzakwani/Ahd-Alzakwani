@@ -41,6 +41,10 @@ public class Main {
 		apiMenueOptions.put(2, " Pagination \n");
 		apiMenueOptions.put(3, " Passwords \n");
 		apiMenueOptions.put(4, " Seeding \n");
+		apiMenueOptions.put(5, " Nationality \n");
+		apiMenueOptions.put(6, " Specify Gender \n");
+		apiMenueOptions.put(7, " Including fields \n");
+		apiMenueOptions.put(8, " Excluding fields \n");
 		System.out.println(apiMenueOptions);
 		System.out.println("PLEASE SELECT ONLY ONE OPTION");
 		System.out.println("*****************************");
@@ -181,7 +185,7 @@ public class Main {
 				Integer resultss = scanner1.nextInt();
 				System.out.println("Enter Number of Seed ? ");
 				String Seed = scanner1.next();
-				System.out.println("Enter Number of Seed ? ");
+				System.out.println("Enter gender ? ");
 				String gender = scanner1.next();
 				URL url =  new URL("https://randomuser.me/api/?page="+pages+"&results="+resultss+"&seed="+Seed+"?gender="+gender);
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();	
@@ -300,7 +304,237 @@ public class Main {
 					System.out.println("|"+"The Seed Is : "+result.getInfo().getSeed());
 					System.out.println("|"+" ***************************** "+"|");
 					}
+				break;
+				case 5:
 					
+					System.out.println("Enter Nationality ? ");
+					String nat1 = scanner1.next();
+					
+		
+					URL url7 =  new URL("https://randomuser.me/api/?nat="+nat1);
+					HttpURLConnection conn7 = (HttpURLConnection) url7.openConnection();	
+					conn7.setRequestMethod("GET");
+					conn7.connect();
+					StringBuilder informationString7 = new StringBuilder();
+					int responseCode7 = conn7.getResponseCode();
+					if(responseCode7 != 200)
+					{
+						throw new RuntimeException("HttpresponseCode");
+						
+					}else {
+						Scanner scanner = new Scanner(url7.openStream());
+						while(scanner.hasNext()) {
+							informationString7.append(scanner.nextLine());
+						}
+					
+						scanner.close();
+						Gson gson = new Gson();
+						
+						RandomUserAPI result= gson.fromJson(informationString7.toString(), RandomUserAPI.class);
+						
+						System.out.println("|"+"The Name Is : "+result.getResults().get(0).getName().getFirstName()+" "+result.getResults().get(0).getName().getLastName());
+						System.out.println("|"+"The Cell Is : "+result.getResults().get(0).getCell());
+						System.out.println("|"+"The Email Is : "+result.getResults().get(0).getEmail());
+						System.out.println("|"+"The Gender Is : "+result.getResults().get(0).getGender());
+						System.out.println("|"+"The Page Is : "+result.getInfo().getPage());
+						System.out.println("|"+"The Results Is : "+result.getInfo().getResults());
+						System.out.println("|"+"The Seed Is : "+result.getInfo().getSeed());
+						System.out.println("|"+"Nationality Is : "+result.getResults().get(0).getNat());
+				
+					}
+					break;
+					
+					case 6:
+					
+					System.out.println("Specify Gender ? ");
+					String gen1 = scanner1.next();
+					
+		
+					URL url8 =  new URL("https://randomuser.me/api/?gender="+gen1);
+					HttpURLConnection conn8 = (HttpURLConnection) url8.openConnection();	
+					conn8.setRequestMethod("GET");
+					conn8.connect();
+					StringBuilder informationString8 = new StringBuilder();
+					int responseCode8 = conn8.getResponseCode();
+					if(responseCode8 != 200)
+					{
+						throw new RuntimeException("HttpresponseCode");
+						
+					}else {
+						Scanner scanner = new Scanner(url8.openStream());
+						while(scanner.hasNext()) {
+							informationString8.append(scanner.nextLine());
+						}
+					
+						scanner.close();
+						Gson gson = new Gson();
+						
+						RandomUserAPI result= gson.fromJson(informationString8.toString(), RandomUserAPI.class);
+						
+						System.out.println("|"+"The Name Is : "+result.getResults().get(0).getName().getFirstName()+" "+result.getResults().get(0).getName().getLastName());
+						System.out.println("|"+"The Cell Is : "+result.getResults().get(0).getCell());
+						System.out.println("|"+"The Email Is : "+result.getResults().get(0).getEmail());
+						System.out.println("|"+"The Gender Is : "+result.getResults().get(0).getGender());
+						System.out.println("|"+"The Page Is : "+result.getInfo().getPage());
+						System.out.println("|"+"The Results Is : "+result.getInfo().getResults());
+						System.out.println("|"+"The Seed Is : "+result.getInfo().getSeed());
+						System.out.println("|"+"Nationality Is : "+result.getResults().get(0).getNat());
+						System.out.println("|"+"Gender Is : "+result.getResults().get(0).getGender());
+				
+					}
+					break;
+					
+					case 7:
+						try {
+						System.out.println("Enter the fields you want to Include");
+						System.out.println("gender\r\n"+"name\r\n"+"location\r\n"+"email\r\n"+ 
+								"login\r\n"+"registered\r\n"+"dob\r\n"+"phone\r\n"+ 
+								"cell\r\n"+ "id\r\n"+ "picture\r\n"+"nat");
+						String inc1 = scanner1.next();
+						
+			
+						URL url9 =  new URL("https://randomuser.me/api/?inc="+inc1+"&results=3");
+						HttpURLConnection conn9 = (HttpURLConnection) url9.openConnection();	
+						conn9.setRequestMethod("GET");
+						conn9.connect();
+						StringBuilder informationString3 = new StringBuilder();
+						int responseCode9 = conn9.getResponseCode();
+						if(responseCode9 != 200)
+						{
+							throw new RuntimeException("HttpresponseCode");
+							
+						}else {
+							Scanner scanner = new Scanner(url9.openStream());
+							while(scanner.hasNext()) {
+								informationString3.append(scanner.nextLine());
+							}
+						
+							scanner.close();
+							Gson gson = new Gson();
+							
+							RandomUserAPI result= gson.fromJson(informationString3.toString(), RandomUserAPI.class);
+							
+							if(result.getResults().get(0).getGender()!= null) {
+								System.out.println("|"+"The Gender Is : "+result.getResults().get(0).getGender());}
+//edited: added Title,First,Last							
+							if(result.getResults().get(0).getName()!= null) {		
+							System.out.println("|"+"The Title Name Is : "+result.getResults().get(0).getName().getTitleName());	
+							System.out.println("|"+"The First Name Is : "+result.getResults().get(0).getName().getFirstName());
+							System.out.println("|"+"The Last Name Is : "+result.getResults().get(0).getName().getLastName());}
+//added	Location							
+							if(result.getResults().get(0).getLocation()!= null) {
+								System.out.println("|"+"Location Is : "+result.getResults().get(0).getLocation());}
+							
+							if(result.getResults().get(0).getEmail()!= null) {
+								System.out.println("|"+"The Email Is : "+result.getResults().get(0).getEmail());}
+//added login							
+							if(result.getResults().get(0).getLogin()!= null) {
+								System.out.println("|"+"login Is : "+result.getResults().get(0).getLogin());}
+//added registered							
+							if(result.getResults().get(0).getRegisterd()!= null) {
+								System.out.println("|"+"Registered Is : "+result.getResults().get(0).getRegisterd());}
+//added dob							
+							if(result.getResults().get(0).getDob()!= null) {
+								System.out.println("|"+"Date Of Birth Is : "+result.getResults().get(0).getDob());}
+//added phone							
+							if(result.getResults().get(0).getPhone()!= null) {
+								System.out.println("|"+"phone Is : "+result.getResults().get(0).getPhone());}
+							
+							if(result.getResults().get(0).getCell()!= null) {
+							System.out.println("|"+"The Cell Is : "+result.getResults().get(0).getCell());}
+//added id
+							if(result.getResults().get(0).getId()!= null) {
+								System.out.println("|"+"Id Is : "+result.getResults().get(0).getId());}
+//added picture							
+							if(result.getResults().get(0).getPicture()!= null) {
+								System.out.println("|"+"picture Is : "+result.getResults().get(0).getPicture());}
+							
+							if(result.getResults().get(0).getNat()!= null) {
+							System.out.println("|"+"Nationality Is : "+result.getResults().get(0).getNat());}
+							  								 
+							System.out.println("|"+"Includes fields are  : "+ inc1);
+						}
+						}catch(Exception e)
+						{
+							System.out.println(e);
+
+						}
+						
+						
+						case 8:
+						try {
+						System.out.println("Enter the fields you want to Excluding");
+						System.out.println("gender\r\n"+"name\r\n"+"location\r\n"+"email\r\n"+ 
+											"login\r\n"+"registered\r\n"+"dob\r\n"+"phone\r\n"+ 
+											"cell\r\n"+ "id\r\n"+ "picture\r\n"+"nat");
+						String exc1 = scanner1.next();
+						
+			
+						URL url91 =  new URL("https://randomuser.me/api/?exc="+exc1);
+						HttpURLConnection conn91 = (HttpURLConnection) url91.openConnection();	
+						conn91.setRequestMethod("GET");
+						conn91.connect();
+						StringBuilder informationString91 = new StringBuilder();
+						int responseCode91 = conn91.getResponseCode();
+						if(responseCode91 != 200)
+						{
+							throw new RuntimeException("HttpresponseCode");
+							
+						}else {
+							Scanner scanner = new Scanner(url91.openStream());
+							while(scanner.hasNext()) {
+								informationString91.append(scanner.nextLine());
+							}
+						
+							scanner.close();
+							Gson gson = new Gson();
+							
+							RandomUserAPI result= gson.fromJson(informationString91.toString(), RandomUserAPI.class);
+							if(result.getResults().get(0).getGender()!= null) {
+								System.out.println("|"+"The Gender Is : "+result.getResults().get(0).getGender());}
+//edited: added Title,First,Last							
+							if(result.getResults().get(0).getName()!= null) {		
+							System.out.println("|"+"The Title Name Is : "+result.getResults().get(0).getName().getTitleName());	
+							System.out.println("|"+"The First Name Is : "+result.getResults().get(0).getName().getFirstName());
+							System.out.println("|"+"The Last Name Is : "+result.getResults().get(0).getName().getLastName());}
+//added	Location							
+							if(result.getResults().get(0).getLocation()!= null) {
+								System.out.println("|"+"Location Is : "+result.getResults().get(0).getLocation());}
+							
+							if(result.getResults().get(0).getEmail()!= null) {
+								System.out.println("|"+"The Email Is : "+result.getResults().get(0).getEmail());}
+//added login							
+							if(result.getResults().get(0).getLogin()!= null) {
+								System.out.println("|"+"login Is : "+result.getResults().get(0).getLogin());}
+//added registered							
+							if(result.getResults().get(0).getRegisterd()!= null) {
+								System.out.println("|"+"Registered Is : "+result.getResults().get(0).getRegisterd());}
+//added dob							
+							if(result.getResults().get(0).getDob()!= null) {
+								System.out.println("|"+"Date Of Birth Is : "+result.getResults().get(0).getDob());}
+//added phone							
+							if(result.getResults().get(0).getPhone()!= null) {
+								System.out.println("|"+"phone Is : "+result.getResults().get(0).getPhone());}
+							
+							if(result.getResults().get(0).getCell()!= null) {
+							System.out.println("|"+"The Cell Is : "+result.getResults().get(0).getCell());}
+//added id
+							if(result.getResults().get(0).getId()!= null) {
+								System.out.println("|"+"Id Is : "+result.getResults().get(0).getId());}
+//added picture							
+							if(result.getResults().get(0).getPicture()!= null) {
+								System.out.println("|"+"picture Is : "+result.getResults().get(0).getPicture());}
+							
+							if(result.getResults().get(0).getNat()!= null) {
+							System.out.println("|"+"Nationality Is : "+result.getResults().get(0).getNat());}
+								System.out.println("|"+"Exclude fields are  : "+ exc1);
+						}
+						}catch(Exception e)
+						{
+							System.out.println(e);
+
+						}
+			
 					
 				//}
 
@@ -645,4 +879,4 @@ public class Main {
 								 */
 
 	}
-}
+	}
