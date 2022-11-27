@@ -1,9 +1,19 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Stack;
+import com.google.gson.stream.*;
 
 import com.google.gson.Gson;
 
@@ -42,6 +52,7 @@ public class Main {
 		apiMenueOptions.put(6, " Specify Gender \n");
 		apiMenueOptions.put(7, " Including fields \n");
 		apiMenueOptions.put(8, " Excluding fields \n");
+		apiMenueOptions.put(9, " File JSON \n");
 		System.out.println(apiMenueOptions);
 		System.out.println("PLEASE SELECT ONLY ONE OPTION");
 		System.out.println("*****************************");
@@ -54,6 +65,10 @@ public class Main {
 		URL url;
 		HttpURLConnection conn;
 		StringBuilder informationString;
+		ObjectOutputStream fileWrite = null;
+		final String path = "C:\\Users\\User009\\Desktop\\School\\JsonFileInformation.txt";
+		
+		ObjectInputStream fileRead = null;
 		while (menuExit) {
 
 			apiMenue();
@@ -66,11 +81,11 @@ public class Main {
 						Integer users = scanner1.nextInt();
 						if (users == 0) {
 
-							 url = new URL("https://randomuser.me/api/?results=30");
-							 conn = (HttpURLConnection) url.openConnection();
+							url = new URL("https://randomuser.me/api/?results=30");
+							conn = (HttpURLConnection) url.openConnection();
 							conn.setRequestMethod("GET");
 							conn.connect();
-							 informationString = new StringBuilder();
+							informationString = new StringBuilder();
 							int responseCode = conn.getResponseCode();
 							if (responseCode != 200) {
 								throw new RuntimeException("HttpresponseCode");
@@ -108,11 +123,11 @@ public class Main {
 						else {
 
 							for (int i = 0; i < users; i++) {
-								 url = new URL("https://randomuser.me/api/");
-								 conn = (HttpURLConnection) url.openConnection();
+								url = new URL("https://randomuser.me/api/");
+								conn = (HttpURLConnection) url.openConnection();
 								conn.setRequestMethod("GET");
 								conn.connect();
-								 informationString = new StringBuilder();
+								informationString = new StringBuilder();
 								int responseCode = conn.getResponseCode();
 								if (responseCode != 200) {
 									throw new RuntimeException("HttpresponseCode");
@@ -175,12 +190,12 @@ public class Main {
 				String Seed = scanner1.next();
 				System.out.println("Enter gender ? ");
 				String gender = scanner1.next();
-				 url = new URL("https://randomuser.me/api/?page=" + pages + "&results=" + resultss + "&seed=" + Seed
+				url = new URL("https://randomuser.me/api/?page=" + pages + "&results=" + resultss + "&seed=" + Seed
 						+ "?gender=" + gender);
-				 conn = (HttpURLConnection) url.openConnection();
+				conn = (HttpURLConnection) url.openConnection();
 				conn.setRequestMethod("GET");
 				conn.connect();
-				 informationString = new StringBuilder();
+				informationString = new StringBuilder();
 				int responseCode = conn.getResponseCode();
 				if (responseCode != 200) {
 					throw new RuntimeException("HttpresponseCode");
@@ -215,11 +230,11 @@ public class Main {
 				System.out.println("Enter Password ? ");
 				String pass = scanner1.next();
 
-				 url = new URL("https://randomuser.me/api/?password=" + pass);
-				 conn = (HttpURLConnection) url.openConnection();
+				url = new URL("https://randomuser.me/api/?password=" + pass);
+				conn = (HttpURLConnection) url.openConnection();
 				conn.setRequestMethod("GET");
 				conn.connect();
-				 informationString = new StringBuilder();
+				informationString = new StringBuilder();
 				int responseCode1 = conn.getResponseCode();
 				if (responseCode1 != 200) {
 					throw new RuntimeException("HttpresponseCode");
@@ -253,11 +268,11 @@ public class Main {
 				System.out.println("Enter Seed ? ");
 				String Seeds1 = scanner1.next();
 
-				 url = new URL("https://randomuser.me/api/?&seed=" + Seeds1);
-				 conn = (HttpURLConnection) url.openConnection();
+				url = new URL("https://randomuser.me/api/?&seed=" + Seeds1);
+				conn = (HttpURLConnection) url.openConnection();
 				conn.setRequestMethod("GET");
 				conn.connect();
-				 informationString = new StringBuilder();
+				informationString = new StringBuilder();
 				int responseCode2 = conn.getResponseCode();
 				if (responseCode2 != 200) {
 					throw new RuntimeException("HttpresponseCode");
@@ -292,11 +307,11 @@ public class Main {
 				System.out.println("Enter Nationality ? ");
 				String nat1 = scanner1.next();
 
-				 url = new URL("https://randomuser.me/api/?nat=" + nat1);
-				 conn = (HttpURLConnection) url.openConnection();
+				url = new URL("https://randomuser.me/api/?nat=" + nat1);
+				conn = (HttpURLConnection) url.openConnection();
 				conn.setRequestMethod("GET");
 				conn.connect();
-				 informationString = new StringBuilder();
+				informationString = new StringBuilder();
 				int responseCode7 = conn.getResponseCode();
 				if (responseCode7 != 200) {
 					throw new RuntimeException("HttpresponseCode");
@@ -330,11 +345,11 @@ public class Main {
 				System.out.println("Specify Gender ? ");
 				String gen1 = scanner1.next();
 
-				 url = new URL("https://randomuser.me/api/?gender=" + gen1);
-				 conn = (HttpURLConnection) url.openConnection();
+				url = new URL("https://randomuser.me/api/?gender=" + gen1);
+				conn = (HttpURLConnection) url.openConnection();
 				conn.setRequestMethod("GET");
 				conn.connect();
-				 informationString = new StringBuilder();
+				informationString = new StringBuilder();
 				int responseCode8 = conn.getResponseCode();
 				if (responseCode8 != 200) {
 					throw new RuntimeException("HttpresponseCode");
@@ -372,11 +387,11 @@ public class Main {
 									+ "dob\r\n" + "phone\r\n" + "cell\r\n" + "id\r\n" + "picture\r\n" + "nat");
 					String inc1 = scanner1.next();
 
-					 url = new URL("https://randomuser.me/api/?inc=" + inc1 + "&results=3");
-					 conn = (HttpURLConnection) url.openConnection();
+					url = new URL("https://randomuser.me/api/?inc=" + inc1 + "&results=3");
+					conn = (HttpURLConnection) url.openConnection();
 					conn.setRequestMethod("GET");
 					conn.connect();
-					 informationString = new StringBuilder();
+					informationString = new StringBuilder();
 					int responseCode9 = conn.getResponseCode();
 					if (responseCode9 != 200) {
 						throw new RuntimeException("HttpresponseCode");
@@ -460,11 +475,11 @@ public class Main {
 									+ "dob\r\n" + "phone\r\n" + "cell\r\n" + "id\r\n" + "picture\r\n" + "nat");
 					String exc1 = scanner1.next();
 
-					 url = new URL("https://randomuser.me/api/?exc=" + exc1);
-					 conn = (HttpURLConnection) url.openConnection();
+					url = new URL("https://randomuser.me/api/?exc=" + exc1);
+					conn = (HttpURLConnection) url.openConnection();
 					conn.setRequestMethod("GET");
 					conn.connect();
-					 informationString = new StringBuilder();
+					informationString = new StringBuilder();
 					int responseCode91 = conn.getResponseCode();
 					if (responseCode91 != 200) {
 						throw new RuntimeException("HttpresponseCode");
@@ -543,6 +558,67 @@ public class Main {
 				menuExit = true;
 
 				break;
+			case 9:
+				try {
+					
+//					FileOutputStream fileName = new FileOutputStream(path);
+//					fileWrite = new ObjectOutputStream(fileName);
+//					fileRead = new ObjectInputStream(new FileInputStream(path));
+				
+					/*
+					 * System.out.println("Specify Gender ? "); String genders = scanner1.next();
+					 */
+					
+					Path pathFile = Paths.get(path);
+
+
+				url = new URL("https://randomuser.me/api/?results=5");
+				conn = (HttpURLConnection) url.openConnection();
+				conn.setRequestMethod("GET");
+				conn.connect();
+				informationString = new StringBuilder();
+				int responseCodeconn = conn.getResponseCode();
+				if (responseCodeconn != 200) {
+					throw new RuntimeException("HttpresponseCode");
+
+				} else {
+					Scanner scanner = new Scanner(url.openStream());
+					while (scanner.hasNext()) {
+						informationString.append(scanner.nextLine());
+					}
+					scanner.close();
+					//System.out.println(informationString);
+					String infoString = informationString.toString();
+					Files.writeString(pathFile, infoString,StandardCharsets.UTF_8  );
+					
+					String jsonFromFile = Files.readString(pathFile);
+//					fileWrite.write(infoString);
+					
+					Gson gson = new Gson();
+				
+					RandomUserAPI  data = gson.fromJson(jsonFromFile, RandomUserAPI.class);
+					
+					
+//					for (int k = 0; k < informationString.length(); k++) {
+
+					
+						System.out.println(" ***************************** " + "|");
+						System.out.println("|" + "The Name Is : " + data.getResults().get(0).getName().getFirstName()
+								+ " " + data.getResults().get(0).getName().getLastName());
+						System.out.println("|" + "The Cell Is : " + data.getResults().get(0).getCell());
+						System.out.println("|" + "The Email Is : " + data.getResults().get(0).getEmail());
+						System.out.println("|" + "The Gender Is : " + data.getResults().get(0).getGender());
+						System.out.println("|" + "The Phone Is : " + data.getResults().get(0).getPhone());
+						System.out.println("|" + " ***************************** " + "|");
+
+//					}
+
+				}
+				}catch(Exception e) {
+					System.out.println(e);
+
+				}
+				break;
 
 			}
 
@@ -574,8 +650,8 @@ public class Main {
 		 * String teacherName = "Ahd"; String inputStudentSchool = null; Stack<String>
 		 * history = new Stack<String>(); HashMap<Integer, String> menueOptions = new
 		 * HashMap<Integer, String>(); ArrayList<School> schoolList = new ArrayList<>();
-		 * ObjectOutputStream fileWrite = null; ObjectInputStream fileRead = null;
-		 * Student studentDetails = new Student();
+		 * ///// * ObjectOutputStream fileWrite = null; ObjectInputStream fileRead =
+		 * null; Student studentDetails = new Student();
 		 * 
 		 * try { FileOutputStream fileName = new
 		 * FileOutputStream("C:\\Users\\User009\\Desktop\\School\\history.txt");
